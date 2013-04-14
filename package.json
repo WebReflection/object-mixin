@@ -1,0 +1,22 @@
+{
+  "version": "0.0.0",
+  "name": "object-mixin",
+  "description": "",
+  "homepage": "https://github.com/WebReflection/object-mixin",
+  "keywords": [],
+  "author": {
+    "name": "",
+    "web": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/WebReflection/object-mixin.git"
+  },
+  "main": "./build/object-mixin.node.js",
+  "scripts": {
+    "test": "node test/.test.js"
+  },
+  "dependencies": {
+    "wru": ">= 0.0.0"
+  }
+}
