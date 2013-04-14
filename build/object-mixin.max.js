@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-var main = /*jslint browser: true, forin: true, plusplus: true, indent: 4 */
+/*jslint browser: true, forin: true, plusplus: true, indent: 4 */
 (function(Object, mixin) {
     "use strict"; // happy linter ^_____^
 
