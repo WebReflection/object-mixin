@@ -24,13 +24,21 @@ Object.mixin(
   [arg0, arg1, ..., argN]
                   // optional arguments, if specified
                   // used to invoke the mixin
-):target
+
+):target          // returns the target object modified
 
 ```
+
+
+### Compatibility
+Should be compatible with all JavaScript ES3 or JScript engines.
+
+[node.js](build/object-mixin.node.js) module, [AMD](build/object-mixin.amd.js) module, and generic env [standalone](build/object-mixin.js) file.
+
 
 ### Example
 
-```
+```javascript
 // using an object
 
 var a = {a: 'b'},
@@ -71,12 +79,6 @@ console.log([
   // same as instance1.getIdFor('a')
 ].join('\n'));
 ```
-
-
-### Compatibility
-Should be compatible with all JavaScript ES3 or JScript engines.
-
-[node.js](build/object-mixin.node.js) module, [AMD](build/object-mixin.amd.js) module, and generic env [standalone](build/object-mixin.js) file.
 
 
 ### License
