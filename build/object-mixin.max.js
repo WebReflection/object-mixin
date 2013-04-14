@@ -129,4 +129,4 @@ ne*/var
             }
         }
     );
-}(Object, 'mixin'));;
+}(Object, 'mixin'));
