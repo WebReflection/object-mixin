@@ -51,7 +51,7 @@ wru.test([
   },
   // ES5+ compatible tests
   {
-    name: "descriptors",
+    name: "descriptors get",
     test: function () {
       if (Object.getOwnPropertyDescriptor) {
         function get() {
@@ -69,6 +69,28 @@ wru.test([
           )
         );
         obj.key;
+        wru.assert(obj === 123);
+      }
+    }
+  }, {
+    name: "descriptors set",
+    test: function () {
+      if (Object.getOwnPropertyDescriptor) {
+        function set(value) {
+          wru.assert(true);
+          obj = value;
+        }
+        var obj = Object.mixin(
+          {},
+          Object.defineProperty(
+            {},
+            'key',
+            {
+              set: wru.async(set)
+            }
+          )
+        );
+        obj.key = 123;
         wru.assert(obj === 123);
       }
     }
