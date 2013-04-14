@@ -81,7 +81,7 @@ ne*/var
                         key = keys[i++],
                         // ... via same property descriptor
                         getOwnPropertyDescriptor(
-                            source,
+                            enricher,
                             key
                         )
                     );
