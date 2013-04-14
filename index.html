@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Object-mixin by WebReflection</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Object-mixin</h1>
+        <p>ES6 next big thing polyfilled before it gets real</p>
+
+        <p class="view"><a href="https://github.com/WebReflection/object-mixin">View the Project on GitHub <small>WebReflection/object-mixin</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/WebReflection/object-mixin/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/WebReflection/object-mixin/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/WebReflection/object-mixin">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>object-mixin</h1>
+
+<p>A possible ES6 polyfill</p>
+
+<p><a href="http://travis-ci.org/WebReflection/object-mixin"><img src="https://secure.travis-ci.org/WebReflection/object-mixin.png" alt="build status"></a></p>
+
+<h3>API</h3>
+
+<div class="highlight"><pre>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">mixin</span><span class="p">(</span>
+  <span class="nx">target</span><span class="o">:</span><span class="nb">Object</span><span class="p">,</span>  <span class="c1">// the object to be enriched</span>
+
+  <span class="nx">source</span><span class="o">:</span><span class="nb">Object</span><span class="o">|</span><span class="nb">Function</span>
+                  <span class="c1">// if object, all own properties</span>
+                  <span class="c1">// are copied over the target</span>
+
+                  <span class="c1">// if function</span>
+                  <span class="c1">// this is invoked with target</span>
+                  <span class="c1">// as the context</span>
+
+  <span class="p">[</span><span class="nx">arg0</span><span class="p">,</span> <span class="nx">arg1</span><span class="p">,</span> <span class="p">...,</span> <span class="nx">argN</span><span class="p">]</span>
+                  <span class="c1">// optional arguments, if specified</span>
+                  <span class="c1">// used to invoke the mixin</span>
+
+<span class="p">)</span><span class="o">:</span><span class="nx">target</span>          <span class="c1">// returns the target object modified</span>
+
+</pre></div>
+
+<h3>Compatibility</h3>
+
+<p>Should be compatible with all JavaScript ES3 or JScript engines.</p>
+
+<p><a href="build/object-mixin.node.js">node.js</a> module, <a href="build/object-mixin.amd.js">AMD</a> module, and generic env <a href="build/object-mixin.js">standalone</a> file.</p>
+
+<h3>Example</h3>
+
+<div class="highlight"><pre><span class="c1">// using an object</span>
+
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span><span class="nx">a</span><span class="o">:</span> <span class="s1">'b'</span><span class="p">},</span>
+    <span class="nx">b</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">mixin</span><span class="p">({</span><span class="nx">b</span><span class="o">:</span> <span class="s1">'b'</span><span class="p">},</span> <span class="nx">a</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">b</span><span class="p">));</span>
+<span class="c1">// {"a":"a","b":"b"}</span>
+
+
+<span class="c1">// using a function</span>
+<span class="kd">function</span> <span class="nx">addUniqueIdFunctionality</span><span class="p">(</span><span class="nx">prefix</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span>
+    <span class="nx">privatelyShared</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">prefix</span><span class="p">)</span> <span class="nx">prefix</span> <span class="o">=</span> <span class="s1">'.'</span> <span class="o">+</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">).</span><span class="nx">getTime</span><span class="p">();</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">getIdFor</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">privatelyShared</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">||</span> <span class="p">(</span>
+      <span class="nx">privatelyShared</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="o">++</span><span class="nx">i</span> <span class="o">+</span> <span class="nx">prefix</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span>
+    <span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">GenericClass</span><span class="p">(){}</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">mixin</span><span class="p">(</span>
+  <span class="nx">GenericClass</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span>
+  <span class="nx">addUniqueIdFunctionality</span>
+<span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">instance1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GenericClass</span><span class="p">,</span>
+    <span class="nx">instance2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GenericClass</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">([</span>
+  <span class="nx">instance1</span><span class="p">.</span><span class="nx">getIdFor</span><span class="p">(</span><span class="s1">'a'</span><span class="p">),</span>
+  <span class="nx">instance1</span><span class="p">.</span><span class="nx">getIdFor</span><span class="p">(</span><span class="s1">'b'</span><span class="p">),</span> <span class="c1">// different</span>
+  <span class="nx">instance2</span><span class="p">.</span><span class="nx">getIdFor</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span>
+  <span class="c1">// same as instance1.getIdFor('a')</span>
+<span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s1">'\n'</span><span class="p">));</span>
+</pre></div>
+
+<h3>License</h3>
+
+<pre><code>           DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+                   Version 2, December 2004
+
+Copyright (C) 2013 Andrea Giammarchi &lt;spam@hater.me&gt;
+
+Everyone is permitted to copy and distribute verbatim or modified
+copies of this license document, and changing it is allowed as long
+as the name is changed.
+
+           DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+  TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+
+ 0. You just DO WHAT THE FUCK YOU WANT TO.
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/WebReflection">WebReflection</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
