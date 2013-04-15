@@ -32,7 +32,7 @@ ne*/var
         has          = ObjectPrototype.hasOwnProperty,
 
         emptyArray   = [],
-        slice        = emptyArray.slice,
+        // slice        = emptyArray.slice,
 
         // for IE < 9 and non IE5 yet browsers
         defineProperty = Object.defineProperty ||
