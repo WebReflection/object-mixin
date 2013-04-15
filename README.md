@@ -10,20 +10,26 @@ A possible ES6 polyfill
 
 ```javascript
 
+// basic signature
 Object.mixin(
   target:Object,  // the object to be enriched
 
-  source:Object|Function
-                  // if object, all own properties
-                  // are copied over the target
+  source:Object   // all own properties of this object
+                  // will be assigned using same descriptor
 
-                  // if function
-                  // this is invoked with target
-                  // as the context
+):target          // returns the target object modified
 
-  [arg0, arg1, ..., argN]
-                  // optional arguments, if specified
-                  // used to invoke the mixin
+
+// overload with Traits (Function)
+
+Object.mixin(
+  target:Object,  // the object to be enriched
+
+  source:Trait    // invoked with target as context
+
+  [, args:Array|Arguments]
+                  // optional args property
+                  // used at Trait arguments
 
 ):target          // returns the target object modified
 
@@ -67,6 +73,7 @@ function GenericClass(){}
 Object.mixin(
   GenericClass.prototype,
   addUniqueIdFunctionality
+  // , ['my_prefix']
 );
 
 var instance1 = new GenericClass,

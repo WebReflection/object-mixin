@@ -21,12 +21,12 @@ wru.test([
     test: function () {
       function method() {}
 
-      function mixin(){
+      function Trait(){
         this.method = method;
       }
       delete mixin.prototype.constructor;
 
-      var obj = Object.mixin({}, mixin);
+      var obj = Object.mixin({}, Trait);
       wru.assert('invoked', obj.method === method);
     }
   },{
@@ -34,14 +34,14 @@ wru.test([
     test: function () {
       function method() {}
 
-      function mixin(a, b){
+      function Trait(a, b){
         this.a = a;
         this.b = b;
         this.method = method;
       }
       delete mixin.prototype.constructor;
 
-      var obj = Object.mixin({}, mixin, 1, 2);
+      var obj = Object.mixin({}, Trait, [1, 2]);
       wru.assert('invokedwith args',
         obj.method === method &&
         obj.a === 1 &&

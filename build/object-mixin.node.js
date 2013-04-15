@@ -31,7 +31,8 @@ ne*/var
         defineSetter = ObjectPrototype.__defineSetter__,
         has          = ObjectPrototype.hasOwnProperty,
 
-        slice        = Array.prototype.slice,
+        emptyArray   = [],
+        slice        = emptyArray.slice,
 
         // for IE < 9 and non IE5 yet browsers
         defineProperty = Object.defineProperty ||
@@ -139,7 +140,8 @@ ne*/var
             configurable: true,
             value: function mixin(
                 target, // object to enrich with
-                source  // mixin object or function
+                source, // mixin object or Trait (Function)
+                args    // optional arguments for Trait
             ) {
                 var
                     i,
@@ -161,6 +163,8 @@ ne*/var
                     // // or
                     // Object.mixin(Class.prototype, addFunctionality);
 
+                    source.apply(target, args || emptyArray);
+                    /*
                     // try to perform as fast as possible
                     if (arguments.length < 3) {
                         // so if no extra args are passed ...
@@ -169,6 +173,7 @@ ne*/var
                         // there is no need to slice them as done here
                         source.apply(target, slice.call(arguments, 2));
                     }
+                    */
                 } else {
                     // if source is an object
                     // grab all possibe properties
