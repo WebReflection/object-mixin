@@ -24,7 +24,6 @@ wru.test([
       function Trait(){
         this.method = method;
       }
-      delete mixin.prototype.constructor;
 
       var obj = Object.mixin({}, Trait);
       wru.assert('invoked', obj.method === method);
@@ -39,7 +38,6 @@ wru.test([
         this.b = b;
         this.method = method;
       }
-      delete mixin.prototype.constructor;
 
       var obj = Object.mixin({}, Trait, [1, 2]);
       wru.assert('invokedwith args',
