@@ -51,46 +51,52 @@ wru.test([
   {
     name: "descriptors get",
     test: function () {
-      if (Object.getOwnPropertyDescriptor) {
-        function get() {
-          wru.assert(true);
-          obj = 123;
-        }
-        var obj = Object.mixin(
-          {},
-          Object.defineProperty(
+      try {
+        // don't test IE8
+        if (Object.defineProperty({},'_',{value:1})._) {
+          function get() {
+            wru.assert(true);
+            obj = 123;
+          }
+          var obj = Object.mixin(
             {},
-            'key',
-            {
-              get: wru.async(get)
-            }
-          )
-        );
-        obj.key;
-        wru.assert(obj === 123);
-      }
+            Object.defineProperty(
+              {},
+              'key',
+              {
+                get: wru.async(get)
+              }
+            )
+          );
+          obj.key;
+          wru.assert(obj === 123);
+        }
+      } catch(o_O) {}
     }
   }, {
     name: "descriptors set",
     test: function () {
-      if (Object.getOwnPropertyDescriptor) {
-        function set(value) {
-          wru.assert(true);
-          obj = value;
-        }
-        var obj = Object.mixin(
-          {},
-          Object.defineProperty(
+      try {
+        // don't test IE8
+        if (Object.defineProperty({},'_',{value:1})._) {
+          function set(value) {
+            wru.assert(true);
+            obj = value;
+          }
+          var obj = Object.mixin(
             {},
-            'key',
-            {
-              set: wru.async(set)
-            }
-          )
-        );
-        obj.key = 123;
-        wru.assert(obj === 123);
-      }
+            Object.defineProperty(
+              {},
+              'key',
+              {
+                set: wru.async(set)
+              }
+            )
+          );
+          obj.key = 123;
+          wru.assert(obj === 123);
+        }
+      } catch(o_O) {}
     }
   }
 ]);
