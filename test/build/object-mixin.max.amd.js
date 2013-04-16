@@ -138,7 +138,7 @@ ne*/var
             enumerable: false,
             writable: true,
             configurable: true,
-            value: function mixin(
+            value: function (
                 target, // object to enrich with
                 source, // mixin object or Trait (Function)
                 args    // optional arguments for Trait
