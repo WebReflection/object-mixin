@@ -20,7 +20,14 @@ ne*/var
         // slice        = emptyArray.slice,
 
         // for IE < 9 and non IE5 yet browsers
-        defineProperty = Object.defineProperty ||
+
+        defineProperty = (function(defineProperty){
+          try{
+            return defineProperty({},'_',{value:1})._ && defineProperty;
+          } catch(IE8) {
+            
+          }
+        }(Object.defineProperty)) ||
         function (o, k, d) {
             var
                 get = d.get, // has.call(d, 'get') would be better but
