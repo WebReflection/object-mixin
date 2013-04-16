@@ -35,12 +35,12 @@ ne*/var
         // slice        = emptyArray.slice,
 
         // for IE < 9 and non IE5 yet browsers
-
+        goNative = true,
         defineProperty = (function(defineProperty){
           try{
-            return defineProperty({},'_',{value:1})._ && defineProperty;
+            return defineProperty && defineProperty({},'_',{value:1})._ && defineProperty;
           } catch(IE8) {
-            
+            goNative = false;
           }
         }(Object.defineProperty)) ||
         function (o, k, d) {
@@ -58,7 +58,7 @@ ne*/var
             }
         },
         // for IE < 9 and non IE5 yet browsers
-        getOwnPropertyNames = Object.getOwnPropertyNames ||
+        getOwnPropertyNames = (goNative && Object.getOwnPropertyNames) ||
         (function () {
             var
                 addHiddenOwnProperties = function (result) {
@@ -107,7 +107,7 @@ ne*/var
             };
         }()),
         // IE < 9 or other non ES5 yet browsers
-        getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor ||
+        getOwnPropertyDescriptor = (goNative && Object.getOwnPropertyDescriptor) ||
         function (o, k) {
             var
                 descriptor = {
