@@ -47,7 +47,7 @@ Should be compatible with all JavaScript ES3 or JScript engines.
 ```javascript
 // using an object
 
-var a = {a: 'b'},
+var a = {a: 'a'},
     b = Object.mixin({b: 'b'}, a);
 
 console.log(JSON.stringify(b));
